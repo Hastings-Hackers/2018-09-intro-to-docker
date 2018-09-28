@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  s3:
+    build:
+      context: .
+      dockerfile: fakes3.dockerfile
+    environment:
+      - FAKE_S3_LICENSE_KEY=$FAKE_S3_LICENSE_KEY
+    networks:
+      default:
+        aliases:
+          - s3.lvh.me
+    ports:
+      - "8000:8000"
+    volumes:
+      - s3_data:/fakes3_data
+
+volumes:
+  s3_data:
